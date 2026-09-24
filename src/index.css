@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "DM Serif Display", Georgia, serif;
+
+  /* Backgrounds — warm parchment palette */
+  --color-bg-base: #faf8f4;
+  --color-bg-elevated: #f2ede6;
+  --color-bg-card: #ffffff;
+  --color-bg-input: #f5f1eb;
+  --color-bg-overlay: rgba(250, 248, 244, 0.96);
+
+  /* Borders */
+  --color-border-default: rgba(180, 150, 120, 0.18);
+  --color-border-hover: rgba(193, 123, 80, 0.38);
+  --color-border-active: rgba(193, 123, 80, 0.65);
+
+  /* Brand — terracotta primary */
+  --color-primary: #c17b50;
+  --color-primary-dark: #a0632e;
+  --color-primary-light: rgba(193, 123, 80, 0.12);
+
+  /* Secondary — sage green */
+  --color-secondary: #5b8a6b;
+  --color-secondary-light: rgba(91, 138, 107, 0.12);
+
+  /* Accent — muted lavender */
+  --color-accent: #7c6fcd;
+  --color-accent-light: rgba(124, 111, 205, 0.1);
+
+  /* Text */
+  --color-text-primary: #1e1b18;
+  --color-text-secondary: #6b6259;
+  --color-text-muted: #a09589;
+  --color-text-disabled: #cfc5bb;
+
+  /* States */
+  --color-success: #5b8a6b;
+  --color-warning: #d4a853;
+  --color-danger: #d95f5f;
+
+  /* Legacy compat aliases (used in existing components) */
+  --color-blue-primary: #c17b50;
+  --color-indigo: #7c6fcd;
+  --color-purple: #9d8fdf;
+}
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6, .font-display {
+  font-family: var(--font-display);
+}
+
+/* Grain texture overlay on body */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 128px 128px;
+}
+
+/* Card hover glow — warm version */
+.card-glow {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  background: var(--color-bg-card);
+}
+
+.card-glow:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 12px 40px rgba(193, 123, 80, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.06);
+  border-color: var(--color-border-hover) !important;
+}
+
+.card-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 15%;
+  right: 15%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+  border-radius: 0 0 4px 4px;
+}
+
+.card-glow:hover::before {
+  opacity: 1;
+}
+
+/* Scrollbar — warm minimal */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--color-bg-base); }
+::-webkit-scrollbar-thumb { background: rgba(160, 149, 137, 0.4); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(193, 123, 80, 0.5); }
+
+/* Scrollbar hide utility */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Focus ring — warm */
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Cinematic intro keyframes */
+@keyframes introLineGrow {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes introLetterIn {
+  from { opacity: 0; transform: translateY(40px) skewY(3deg); filter: blur(8px); }
+  to { opacity: 1; transform: translateY(0) skewY(0deg); filter: blur(0); }
+}
+
+@keyframes introFadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes introOverlayOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* Selection */
+::selection {
+  background: rgba(193, 123, 80, 0.2);
+  color: var(--color-text-primary);
+}

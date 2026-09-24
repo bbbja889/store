@@ -1,0 +1,69 @@
+{
+  "entities": {
+    "App": {
+      "title": "App",
+      "description": "An Android application uploaded to the platform.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "slug": { "type": "string" },
+        "name": { "type": "string" },
+        "tagline": { "type": "string" },
+        "description": { "type": "string" },
+        "icon_url": { "type": "string" },
+        "screenshots": { "type": "array", "items": { "type": "string" } },
+        "apk_url": { "type": "string" },
+        "package_name": { "type": "string" },
+        "version": { "type": "string" },
+        "min_android": { "type": "string" },
+        "size_bytes": { "type": "number" },
+        "category": { "type": "string" },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "developer_id": { "type": "string" },
+        "downloads": { "type": "number" },
+        "rating_avg": { "type": "number" },
+        "rating_count": { "type": "number" },
+        "is_verified": { "type": "boolean" },
+        "is_featured": { "type": "boolean" },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["slug", "name", "tagline", "description", "developer_id"]
+    },
+    "Website": {
+      "title": "Website",
+      "description": "A website submitted to the platform.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "slug": { "type": "string" },
+        "name": { "type": "string" },
+        "tagline": { "type": "string" },
+        "description": { "type": "string" },
+        "thumbnail_url": { "type": "string" },
+        "screenshots": { "type": "array", "items": { "type": "string" } },
+        "url": { "type": "string" },
+        "category": { "type": "string" },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "tech_stack": { "type": "array", "items": { "type": "string" } },
+        "developer_id": { "type": "string" },
+        "views": { "type": "number" },
+        "rating_avg": { "type": "number" },
+        "rating_count": { "type": "number" },
+        "is_verified": { "type": "boolean" },
+        "is_featured": { "type": "boolean" },
+        "created_at": { "type": "string", "format": "date-time" }
+      },
+      "required": ["slug", "name", "tagline", "description", "url", "developer_id"]
+    }
+  },
+  "firestore": {
+    "/apps/{appId}": {
+      "schema": { "$ref": "#/entities/App" },
+      "description": "Collection of uploaded Android apps."
+    },
+    "/websites/{websiteId}": {
+      "schema": { "$ref": "#/entities/Website" },
+      "description": "Collection of submitted websites."
+    }
+  }
+}
