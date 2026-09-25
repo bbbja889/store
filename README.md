@@ -4,7 +4,7 @@
 
 **Developer:** Yashraj Ghemud — written, designed & developed by Yashraj Ghemud.
 
-VICZO is an app & website store where every Android APK is X-rayed **on your own device** — permissions, trackers, signatures, certificate, SHA-256 — and every link is checked for disguises. It is wrapped in a single persistent 3D world with a 16-second cinematic intro.
+VICZO is an app & website store where every Android APK is X-rayed **on your own device** — permissions, trackers, signatures, certificate, SHA-256 — and every link is checked for disguises. It is wrapped in a single persistent 3D world with a 26-second, three-act cinematic intro film — "VICZO: The Mask".
 
 > Full design document — story bible, shot-by-shot intro script, chapter plan, engine spec and iteration log: **[docs/REMASTER_PLAN.md](docs/REMASTER_PLAN.md)**
 
