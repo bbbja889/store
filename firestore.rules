@@ -1,0 +1,75 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return signedIn() && request.auth.uid == userId;
+    }
+
+    function shortString(v, max) {
+      return v is string && v.size() > 0 && v.size() <= max;
+    }
+
+    function httpsUrl(v) {
+      return v is string && v.size() <= 2048 && v.matches('^https://.+');
+    }
+
+    // Fields shared by apps and websites.
+    function validCommon(d) {
+      return d.keys().hasAll(['slug', 'name', 'tagline', 'description', 'developer_id', 'developer_name', 'created_at'])
+        && d.developer_id == request.auth.uid
+        && shortString(d.slug, 100)
+        && shortString(d.name, 80)
+        && shortString(d.tagline, 140)
+        && shortString(d.description, 4000)
+        && shortString(d.developer_name, 120)
+        && d.created_at is string
+        && (!('tags' in d) || (d.tags is list && d.tags.size() <= 8))
+        && (!('category' in d) || shortString(d.category, 40))
+        // Only moderators (via the console/Admin SDK) can mark listings verified or featured.
+        && (!('is_verified' in d) || d.is_verified == false)
+        && (!('is_featured' in d) || d.is_featured == false);
+    }
+
+    // The Sentinel passport is optional (older listings have none) but must be well-formed when present.
+    function validPassport(d) {
+      return !('passport' in d) || (
+        d.passport is map
+        && d.passport.score is number && d.passport.score >= 0 && d.passport.score <= 100
+        && d.passport.sha256 is string && d.passport.sha256.size() == 64
+        && d.passport.verdict in ['clean', 'caution', 'danger']
+      );
+    }
+
+    function validApp(d) {
+      return validCommon(d)
+        && validPassport(d)
+        && (!('download_url' in d) || httpsUrl(d.download_url));
+    }
+
+    function validWebsite(d) {
+      return validCommon(d) && httpsUrl(d.url);
+    }
+
+    match /apps/{appId} {
+      allow read: if true;
+      allow create: if signedIn() && validApp(request.resource.data);
+      allow update: if isOwner(resource.data.developer_id)
+        && request.resource.data.developer_id == resource.data.developer_id
+        && validApp(request.resource.data);
+      allow delete: if isOwner(resource.data.developer_id);
+    }
+
+    match /websites/{websiteId} {
+      allow read: if true;
+      allow create: if signedIn() && validWebsite(request.resource.data);
+      allow update: if isOwner(resource.data.developer_id)
+        && request.resource.data.developer_id == resource.data.developer_id
+        && validWebsite(request.resource.data);
+      allow delete: if isOwner(resource.data.developer_id);
+    }
+  }
+}

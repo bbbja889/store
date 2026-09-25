@@ -1,0 +1,53 @@
+{
+  "name": "viczo-store",
+  "private": true,
+  "version": "2.0.0",
+  "description": "VICZO STORE — an app & website store that X-rays every APK and link on your own device, wrapped in a cinematic 3D world.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port=3000 --host=0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --port=4173 --host=0.0.0.0",
+    "clean": "rm -rf dist",
+    "lint": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "samples": "node scripts/build-samples.mjs"
+  },
+  "dependencies": {
+    "@fontsource-variable/jetbrains-mono": "^5.2.0",
+    "@fontsource-variable/outfit": "^5.2.0",
+    "@fontsource-variable/unbounded": "^5.2.0",
+    "@fontsource/instrument-serif": "^5.2.0",
+    "@react-three/drei": "^10.7.8",
+    "@react-three/fiber": "^9.8.1",
+    "@react-three/postprocessing": "^3.1.2",
+    "@react-three/rapier": "^2.2.0",
+    "clsx": "^2.1.1",
+    "fflate": "^0.8.3",
+    "firebase": "^12.19.0",
+    "lenis": "^1.3.26",
+    "lucide-react": "^1.48.0",
+    "maath": "^0.10.8",
+    "motion": "^12.43.0",
+    "postprocessing": "^6.39.5",
+    "react": "~19.3.0",
+    "react-dom": "~19.3.0",
+    "react-router-dom": "^7.18.4",
+    "tailwind-merge": "^3.5.0",
+    "three": "~0.186.1",
+    "zustand": "^5.0.15"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^22.14.0",
+    "@types/react": "~19.3.0",
+    "@types/react-dom": "~19.3.0",
+    "@types/three": "~0.186.0",
+    "@vitejs/plugin-react": "^5.2.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "~5.9.3",
+    "vite": "^7.3.6",
+    "vitest": "^3.2.7"
+  }
+}
