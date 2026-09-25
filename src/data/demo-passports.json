@@ -1,0 +1,598 @@
+{
+  "orbit-notes": {
+    "engine": "sentinel@2",
+    "scanned_at": "2026-09-25T00:25:52.042Z",
+    "score": 100,
+    "grade": "A+",
+    "verdict": "clean",
+    "sha256": "27d1662777db95241f3a2ca8eafb219a74711c89f6f849e2d810be066bbae3cb",
+    "size_bytes": 35148,
+    "package_name": "com.viczo.demo.orbitnotes",
+    "label": "Orbit Notes",
+    "version_name": "2.4.0",
+    "version_code": 240,
+    "min_sdk": 26,
+    "target_sdk": 35,
+    "signature": {
+      "schemes": [
+        "v2"
+      ],
+      "verified": true,
+      "cert_sha256": "80e2c16ab4af548fb85c91f8c9f785265a86173c9585618df8fd822a85a5eac8",
+      "cert_subject": "CN=VICZO Demo Release, O=VICZO Labs, C=IN",
+      "debug_cert": false
+    },
+    "permissions": [
+      "android.permission.INTERNET",
+      "android.permission.POST_NOTIFICATIONS",
+      "android.permission.USE_BIOMETRIC"
+    ],
+    "trackers": [],
+    "signals": [],
+    "flags": {
+      "debuggable": false,
+      "cleartext": false,
+      "allow_backup": false
+    },
+    "composition": {
+      "dex": 209,
+      "native": 0,
+      "resources": 32167,
+      "assets": 55,
+      "manifest": 779,
+      "signatures": 0,
+      "other": 0
+    },
+    "findings": [
+      {
+        "id": "signature-verified",
+        "severity": "good",
+        "title": "Signature verified (v2)",
+        "detail": "RSASSA-PKCS1-v1_5 / SHA-256. Every byte of the APK matches what the developer signed."
+      },
+      {
+        "id": "permissions-light",
+        "severity": "good",
+        "title": "Light on permissions",
+        "detail": "No sensitive permissions requested."
+      },
+      {
+        "id": "no-trackers",
+        "severity": "good",
+        "title": "No known trackers",
+        "detail": "None of the analytics, ads or attribution SDKs Sentinel knows were found."
+      }
+    ]
+  },
+  "lumen-reader": {
+    "engine": "sentinel@2",
+    "scanned_at": "2026-09-25T00:25:52.052Z",
+    "score": 92,
+    "grade": "A",
+    "verdict": "clean",
+    "sha256": "7f9896624f2cf9829bc93bad33fd15038f6275be02dc8ce7e4e4047e97160828",
+    "size_bytes": 35439,
+    "package_name": "com.viczo.demo.lumen",
+    "label": "Lumen Reader",
+    "version_name": "3.1.2",
+    "version_code": 312,
+    "min_sdk": 26,
+    "target_sdk": 35,
+    "signature": {
+      "schemes": [
+        "v2"
+      ],
+      "verified": true,
+      "cert_sha256": "80e2c16ab4af548fb85c91f8c9f785265a86173c9585618df8fd822a85a5eac8",
+      "cert_subject": "CN=VICZO Demo Release, O=VICZO Labs, C=IN",
+      "debug_cert": false
+    },
+    "permissions": [
+      "android.permission.INTERNET",
+      "android.permission.READ_MEDIA_IMAGES",
+      "android.permission.POST_NOTIFICATIONS"
+    ],
+    "trackers": [
+      "firebase-analytics",
+      "firebase-crashlytics"
+    ],
+    "signals": [],
+    "flags": {
+      "debuggable": false,
+      "cleartext": false,
+      "allow_backup": false
+    },
+    "composition": {
+      "dex": 174,
+      "native": 0,
+      "resources": 32167,
+      "assets": 386,
+      "manifest": 778,
+      "signatures": 0,
+      "other": 0
+    },
+    "findings": [
+      {
+        "id": "trackers",
+        "severity": "low",
+        "title": "2 trackers inside",
+        "detail": "Google Firebase Analytics · Firebase Crashlytics"
+      },
+      {
+        "id": "permissions",
+        "severity": "low",
+        "title": "1 sensitive permission",
+        "detail": "Read photos"
+      },
+      {
+        "id": "signature-verified",
+        "severity": "good",
+        "title": "Signature verified (v2)",
+        "detail": "RSASSA-PKCS1-v1_5 / SHA-256. Every byte of the APK matches what the developer signed."
+      }
+    ]
+  },
+  "pulsefit": {
+    "engine": "sentinel@2",
+    "scanned_at": "2026-09-25T00:25:52.066Z",
+    "score": 84,
+    "grade": "B",
+    "verdict": "clean",
+    "sha256": "ea97e6791243ccee092797999281f22229f2de015dc1ccbe4b77f76803228ab4",
+    "size_bytes": 36114,
+    "package_name": "com.viczo.demo.pulsefit",
+    "label": "PulseFit",
+    "version_name": "5.0.4",
+    "version_code": 504,
+    "min_sdk": 26,
+    "target_sdk": 34,
+    "signature": {
+      "schemes": [
+        "v2"
+      ],
+      "verified": true,
+      "cert_sha256": "80e2c16ab4af548fb85c91f8c9f785265a86173c9585618df8fd822a85a5eac8",
+      "cert_subject": "CN=VICZO Demo Release, O=VICZO Labs, C=IN",
+      "debug_cert": false
+    },
+    "permissions": [
+      "android.permission.INTERNET",
+      "android.permission.ACTIVITY_RECOGNITION",
+      "android.permission.BODY_SENSORS",
+      "android.permission.ACCESS_FINE_LOCATION",
+      "android.permission.BLUETOOTH_CONNECT",
+      "android.permission.BLUETOOTH_SCAN",
+      "android.permission.POST_NOTIFICATIONS",
+      "android.permission.FOREGROUND_SERVICE"
+    ],
+    "trackers": [
+      "firebase-analytics",
+      "appsflyer",
+      "onesignal"
+    ],
+    "signals": [],
+    "flags": {
+      "debuggable": false,
+      "cleartext": false,
+      "allow_backup": false
+    },
+    "composition": {
+      "dex": 206,
+      "native": 0,
+      "resources": 32167,
+      "assets": 890,
+      "manifest": 917,
+      "signatures": 0,
+      "other": 0
+    },
+    "findings": [
+      {
+        "id": "trackers",
+        "severity": "low",
+        "title": "3 trackers inside",
+        "detail": "Google Firebase Analytics · AppsFlyer · OneSignal"
+      },
+      {
+        "id": "permissions",
+        "severity": "low",
+        "title": "2 sensitive permissions",
+        "detail": "Body sensors · Precise location"
+      },
+      {
+        "id": "signature-verified",
+        "severity": "good",
+        "title": "Signature verified (v2)",
+        "detail": "RSASSA-PKCS1-v1_5 / SHA-256. Every byte of the APK matches what the developer signed."
+      }
+    ]
+  },
+  "novacam": {
+    "engine": "sentinel@2",
+    "scanned_at": "2026-09-25T00:25:52.084Z",
+    "score": 77,
+    "grade": "B",
+    "verdict": "clean",
+    "sha256": "133029c5efc103e91a580788987bacaa68ef43489471cc71647cecd3fcfa55a8",
+    "size_bytes": 36536,
+    "package_name": "com.viczo.demo.novacam",
+    "label": "NovaCam",
+    "version_name": "2.8.0",
+    "version_code": 280,
+    "min_sdk": 26,
+    "target_sdk": 33,
+    "signature": {
+      "schemes": [
+        "v2"
+      ],
+      "verified": true,
+      "cert_sha256": "80e2c16ab4af548fb85c91f8c9f785265a86173c9585618df8fd822a85a5eac8",
+      "cert_subject": "CN=VICZO Demo Release, O=VICZO Labs, C=IN",
+      "debug_cert": false
+    },
+    "permissions": [
+      "android.permission.CAMERA",
+      "android.permission.RECORD_AUDIO",
+      "android.permission.ACCESS_FINE_LOCATION",
+      "android.permission.READ_MEDIA_IMAGES",
+      "android.permission.READ_MEDIA_VIDEO",
+      "android.permission.INTERNET",
+      "com.google.android.gms.permission.AD_ID"
+    ],
+    "trackers": [
+      "google-admob",
+      "facebook-ads",
+      "unity-ads"
+    ],
+    "signals": [],
+    "flags": {
+      "debuggable": false,
+      "cleartext": false,
+      "allow_backup": true
+    },
+    "composition": {
+      "dex": 189,
+      "native": 0,
+      "resources": 32167,
+      "assets": 1374,
+      "manifest": 872,
+      "signatures": 0,
+      "other": 0
+    },
+    "findings": [
+      {
+        "id": "trackers",
+        "severity": "medium",
+        "title": "3 trackers inside",
+        "detail": "Google AdMob · Facebook Audience Network · Unity Ads"
+      },
+      {
+        "id": "permissions",
+        "severity": "medium",
+        "title": "4 sensitive permissions",
+        "detail": "Use the camera · Record audio · Precise location · Read photos"
+      },
+      {
+        "id": "allow-backup",
+        "severity": "low",
+        "title": "App data can be backed up",
+        "detail": "Its data may be copied off the device via backup."
+      },
+      {
+        "id": "signature-verified",
+        "severity": "good",
+        "title": "Signature verified (v2)",
+        "detail": "RSASSA-PKCS1-v1_5 / SHA-256. Every byte of the APK matches what the developer signed."
+      }
+    ]
+  },
+  "tidepool-chat": {
+    "engine": "sentinel@2",
+    "scanned_at": "2026-09-25T00:25:52.096Z",
+    "score": 92,
+    "grade": "A",
+    "verdict": "clean",
+    "sha256": "57bb8ee6bd1b809f139f1d5de348cc8d396177273d31aaf8fa2bb0158eafb38a",
+    "size_bytes": 35776,
+    "package_name": "com.viczo.demo.tidepool",
+    "label": "Tidepool Chat",
+    "version_name": "1.12.0",
+    "version_code": 1120,
+    "min_sdk": 26,
+    "target_sdk": 35,
+    "signature": {
+      "schemes": [
+        "v2"
+      ],
+      "verified": true,
+      "cert_sha256": "80e2c16ab4af548fb85c91f8c9f785265a86173c9585618df8fd822a85a5eac8",
+      "cert_subject": "CN=VICZO Demo Release, O=VICZO Labs, C=IN",
+      "debug_cert": false
+    },
+    "permissions": [
+      "android.permission.INTERNET",
+      "android.permission.CAMERA",
+      "android.permission.RECORD_AUDIO",
+      "android.permission.READ_CONTACTS",
+      "android.permission.POST_NOTIFICATIONS",
+      "android.permission.USE_BIOMETRIC",
+      "android.permission.FOREGROUND_SERVICE"
+    ],
+    "trackers": [],
+    "signals": [],
+    "flags": {
+      "debuggable": false,
+      "cleartext": false,
+      "allow_backup": false
+    },
+    "composition": {
+      "dex": 144,
+      "native": 0,
+      "resources": 32167,
+      "assets": 647,
+      "manifest": 884,
+      "signatures": 0,
+      "other": 0
+    },
+    "findings": [
+      {
+        "id": "permissions",
+        "severity": "medium",
+        "title": "3 sensitive permissions",
+        "detail": "Use the camera · Record audio · Read your contacts"
+      },
+      {
+        "id": "signature-verified",
+        "severity": "good",
+        "title": "Signature verified (v2)",
+        "detail": "RSASSA-PKCS1-v1_5 / SHA-256. Every byte of the APK matches what the developer signed."
+      },
+      {
+        "id": "no-trackers",
+        "severity": "good",
+        "title": "No known trackers",
+        "detail": "None of the analytics, ads or attribution SDKs Sentinel knows were found."
+      }
+    ]
+  },
+  "quill-keyboard": {
+    "engine": "sentinel@2",
+    "scanned_at": "2026-09-25T00:25:52.106Z",
+    "score": 100,
+    "grade": "A+",
+    "verdict": "clean",
+    "sha256": "dcfd0f541eace70b0e134c4c208e12358db583f559cf5a536d149ff9614cc510",
+    "size_bytes": 35247,
+    "package_name": "com.viczo.demo.quill",
+    "label": "Quill Keyboard",
+    "version_name": "4.0.1",
+    "version_code": 401,
+    "min_sdk": 26,
+    "target_sdk": 35,
+    "signature": {
+      "schemes": [
+        "v2"
+      ],
+      "verified": true,
+      "cert_sha256": "80e2c16ab4af548fb85c91f8c9f785265a86173c9585618df8fd822a85a5eac8",
+      "cert_subject": "CN=VICZO Demo Release, O=VICZO Labs, C=IN",
+      "debug_cert": false
+    },
+    "permissions": [
+      "android.permission.VIBRATE"
+    ],
+    "trackers": [],
+    "signals": [],
+    "flags": {
+      "debuggable": false,
+      "cleartext": false,
+      "allow_backup": false
+    },
+    "composition": {
+      "dex": 111,
+      "native": 0,
+      "resources": 32167,
+      "assets": 250,
+      "manifest": 785,
+      "signatures": 0,
+      "other": 0
+    },
+    "findings": [
+      {
+        "id": "signature-verified",
+        "severity": "good",
+        "title": "Signature verified (v2)",
+        "detail": "RSASSA-PKCS1-v1_5 / SHA-256. Every byte of the APK matches what the developer signed."
+      },
+      {
+        "id": "keyboard-offline",
+        "severity": "good",
+        "title": "Offline keyboard",
+        "detail": "It is a keyboard, so it sees what you type — but it has no internet permission, so it cannot send it anywhere."
+      },
+      {
+        "id": "permissions-light",
+        "severity": "good",
+        "title": "Light on permissions",
+        "detail": "No sensitive permissions requested."
+      },
+      {
+        "id": "no-trackers",
+        "severity": "good",
+        "title": "No known trackers",
+        "detail": "None of the analytics, ads or attribution SDKs Sentinel knows were found."
+      }
+    ]
+  },
+  "pocket-ledger": {
+    "engine": "sentinel@2",
+    "scanned_at": "2026-09-25T00:25:52.120Z",
+    "score": 70,
+    "grade": "C",
+    "verdict": "caution",
+    "sha256": "e3bfa9d78c70ce7cff32812babf50eadffcc1429e8386a82f8e19b16c6fbfa22",
+    "size_bytes": 35621,
+    "package_name": "com.viczo.demo.ledger",
+    "label": "Pocket Ledger",
+    "version_name": "2.2.0",
+    "version_code": 220,
+    "min_sdk": 26,
+    "target_sdk": 30,
+    "signature": {
+      "schemes": [
+        "v2"
+      ],
+      "verified": true,
+      "cert_sha256": "80e2c16ab4af548fb85c91f8c9f785265a86173c9585618df8fd822a85a5eac8",
+      "cert_subject": "CN=VICZO Demo Release, O=VICZO Labs, C=IN",
+      "debug_cert": false
+    },
+    "permissions": [
+      "android.permission.READ_SMS",
+      "android.permission.RECEIVE_SMS",
+      "android.permission.INTERNET",
+      "android.permission.READ_CONTACTS",
+      "android.permission.POST_NOTIFICATIONS"
+    ],
+    "trackers": [
+      "firebase-analytics",
+      "clevertap"
+    ],
+    "signals": [],
+    "flags": {
+      "debuggable": false,
+      "cleartext": false,
+      "allow_backup": true
+    },
+    "composition": {
+      "dex": 191,
+      "native": 0,
+      "resources": 32167,
+      "assets": 521,
+      "manifest": 808,
+      "signatures": 0,
+      "other": 0
+    },
+    "findings": [
+      {
+        "id": "permissions",
+        "severity": "medium",
+        "title": "3 sensitive permissions",
+        "detail": "Read your text messages · Receive text messages · Read your contacts"
+      },
+      {
+        "id": "sms-read",
+        "severity": "medium",
+        "title": "Reads your SMS",
+        "detail": "Legit for SMS-based expense trackers and messaging apps — and exactly what OTP stealers need. Google Play only allows this for a few app types."
+      },
+      {
+        "id": "trackers",
+        "severity": "low",
+        "title": "2 trackers inside",
+        "detail": "Google Firebase Analytics · CleverTap"
+      },
+      {
+        "id": "target-sdk",
+        "severity": "low",
+        "title": "Targets Android API 30",
+        "detail": "Slightly behind current platform requirements."
+      },
+      {
+        "id": "allow-backup",
+        "severity": "low",
+        "title": "App data can be backed up",
+        "detail": "Its data may be copied off the device via backup."
+      },
+      {
+        "id": "signature-verified",
+        "severity": "good",
+        "title": "Signature verified (v2)",
+        "detail": "RSASSA-PKCS1-v1_5 / SHA-256. Every byte of the APK matches what the developer signed."
+      }
+    ]
+  },
+  "beacon-maps": {
+    "engine": "sentinel@2",
+    "scanned_at": "2026-09-25T00:25:52.132Z",
+    "score": 57,
+    "grade": "D",
+    "verdict": "caution",
+    "sha256": "cfeb7c32a2d1d26ca9f5dee29e54763e2388d1028ed50b93049f15cba79ae2e1",
+    "size_bytes": 36084,
+    "package_name": "com.viczo.demo.beacon",
+    "label": "Beacon Maps",
+    "version_name": "0.9.3-beta",
+    "version_code": 93,
+    "min_sdk": 26,
+    "target_sdk": 34,
+    "signature": {
+      "schemes": [
+        "v2"
+      ],
+      "verified": true,
+      "cert_sha256": "921f442ce76dc0ec03055fd5092c1fb1977fbf5e27aeab926543a75d06d2566c",
+      "cert_subject": "CN=Android Debug, O=Android, C=US",
+      "debug_cert": true
+    },
+    "permissions": [
+      "android.permission.INTERNET",
+      "android.permission.ACCESS_FINE_LOCATION",
+      "android.permission.ACCESS_BACKGROUND_LOCATION",
+      "android.permission.POST_NOTIFICATIONS"
+    ],
+    "trackers": [],
+    "signals": [],
+    "flags": {
+      "debuggable": true,
+      "cleartext": false,
+      "allow_backup": true
+    },
+    "composition": {
+      "dex": 112,
+      "native": 0,
+      "resources": 32167,
+      "assets": 1084,
+      "manifest": 803,
+      "signatures": 0,
+      "other": 0
+    },
+    "findings": [
+      {
+        "id": "debug-key",
+        "severity": "high",
+        "title": "Signed with a debug key",
+        "detail": "Debug keys are auto-generated on a developer machine. Real releases are signed with a private release key."
+      },
+      {
+        "id": "debuggable",
+        "severity": "high",
+        "title": "Debug build",
+        "detail": "android:debuggable is on — its private data can be read and its process attached to over USB. Never shipped in real releases."
+      },
+      {
+        "id": "permissions",
+        "severity": "low",
+        "title": "2 sensitive permissions",
+        "detail": "Precise location · Location in the background"
+      },
+      {
+        "id": "allow-backup",
+        "severity": "low",
+        "title": "App data can be backed up",
+        "detail": "Its data may be copied off the device via backup."
+      },
+      {
+        "id": "signature-verified",
+        "severity": "good",
+        "title": "Signature verified (v2)",
+        "detail": "RSASSA-PKCS1-v1_5 / SHA-256. Every byte of the APK matches what the developer signed."
+      },
+      {
+        "id": "no-trackers",
+        "severity": "good",
+        "title": "No known trackers",
+        "detail": "None of the analytics, ads or attribution SDKs Sentinel knows were found."
+      }
+    ]
+  }
+}

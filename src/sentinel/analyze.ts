@@ -147,6 +147,8 @@ export async function analyzeApk(input: Uint8Array, fileName: string, onProgress
     .map((s) => String(s.attrs.name));
   const notificationListener = services.some((s) => s.attrs.permission === 'android.permission.BIND_NOTIFICATION_LISTENER_SERVICE');
   const deviceAdmin = receivers.some((r) => r.attrs.permission === 'android.permission.BIND_DEVICE_ADMIN');
+  const keyboard = services.some((s) => s.attrs.permission === 'android.permission.BIND_INPUT_METHOD');
+  const vpn = services.some((s) => s.attrs.permission === 'android.permission.BIND_VPN_SERVICE');
   const hasLauncher = activities.some((a) => hasIntent(a, 'android.intent.action.MAIN', 'android.intent.category.LAUNCHER'));
   const bootReceiver = receivers.some((r) => hasIntent(r, 'android.intent.action.BOOT_COMPLETED'));
   const isTestApk = findAll(manifest, 'instrumentation').length > 0;
@@ -276,6 +278,16 @@ export async function analyzeApk(input: Uint8Array, fileName: string, onProgress
   }
   if (deviceAdmin) {
     add({ id: 'device-admin', category: 'combo', severity: 'high', penalty: 12, title: 'Requests device-administrator rights', detail: 'Device admins can lock or wipe your phone and block their own uninstall until deactivated.' });
+  }
+  if (sms && !findings.some((f) => f.id === 'combo-banker' || f.id === 'combo-a11y-sms')) {
+    add({ id: 'sms-read', category: 'combo', severity: 'medium', penalty: 8, title: 'Reads your SMS', detail: 'Legit for SMS-based expense trackers and messaging apps — and exactly what OTP stealers need. Google Play only allows this for a few app types.' });
+  }
+  if (keyboard) {
+    if (has('INTERNET')) add({ id: 'keyboard-online', category: 'combo', severity: 'medium', penalty: 8, title: 'Keyboard with internet access', detail: 'Everything you type passes through a keyboard, including passwords — and this one can send data online.' });
+    else add({ id: 'keyboard-offline', category: 'combo', severity: 'good', penalty: 0, title: 'Offline keyboard', detail: 'It is a keyboard, so it sees what you type — but it has no internet permission, so it cannot send it anywhere.' });
+  }
+  if (vpn) {
+    add({ id: 'vpn', category: 'combo', severity: 'medium', penalty: 6, title: 'VPN service', detail: 'Once enabled, all of the device’s traffic flows through this app.' });
   }
   if (notificationListener) {
     add({ id: 'notification-listener', category: 'combo', severity: sms ? 'high' : 'medium', penalty: sms ? 12 : 6, title: 'Reads all notifications', detail: 'Notification access exposes OTPs, chats and bank alerts from every app.' });
