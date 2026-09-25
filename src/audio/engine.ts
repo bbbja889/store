@@ -19,7 +19,11 @@ type Sfx =
   | 'click'
   | 'scan'
   | 'good'
-  | 'alarm';
+  | 'alarm'
+  | 'growl'
+  | 'boom'
+  | 'riserMask'
+  | 'credit';
 
 let ctx: AudioContext | null = null;
 let master: GainNode | null = null;
@@ -342,6 +346,97 @@ export function playSfx(name: Sfx, opts: { pan?: number; gain?: number } = {}) {
       });
       break;
     }
+    case 'growl': {
+      // detuned saws through a waveshaper, tremolo'd — the Mask's voice
+      const shaper = c.createWaveShaper();
+      const curve = new Float32Array(1024);
+      for (let i = 0; i < 1024; i++) {
+        const x = (i / 1023) * 2 - 1;
+        curve[i] = Math.tanh(x * 4);
+      }
+      shaper.curve = curve;
+      const lp = c.createBiquadFilter();
+      lp.type = 'lowpass';
+      lp.frequency.setValueAtTime(900, t);
+      lp.frequency.exponentialRampToValueAtTime(220, t + 1.4);
+      const g = c.createGain();
+      g.gain.setValueAtTime(0.0001, t);
+      g.gain.exponentialRampToValueAtTime(0.5 * vol, t + 0.12);
+      g.gain.exponentialRampToValueAtTime(0.0001, t + 1.5);
+      const trem = c.createOscillator();
+      const tremG = c.createGain();
+      trem.frequency.value = 11;
+      tremG.gain.value = 0.25;
+      trem.connect(tremG).connect(g.gain);
+      [55, 58.3, 41.2].forEach((f) => {
+        const o = c.createOscillator();
+        o.type = 'sawtooth';
+        o.frequency.setValueAtTime(f * 1.4, t);
+        o.frequency.exponentialRampToValueAtTime(f * 0.8, t + 1.4);
+        o.connect(shaper);
+        o.start(t);
+        o.stop(t + 1.55);
+      });
+      shaper.connect(lp).connect(g).connect(out(1, 0.5));
+      trem.start(t);
+      trem.stop(t + 1.55);
+      break;
+    }
+    case 'boom': {
+      playSfx('impact', { gain: 1.2 });
+      const o = c.createOscillator();
+      o.type = 'sine';
+      o.frequency.setValueAtTime(48, t);
+      o.frequency.exponentialRampToValueAtTime(18, t + 3);
+      const g = c.createGain();
+      env(g, t, 0.01, 1.2 * vol, 3.2);
+      o.connect(g).connect(out(1, 0.8));
+      o.start(t);
+      o.stop(t + 3.4);
+      const n = noise(3.5);
+      const bp = c.createBiquadFilter();
+      bp.type = 'lowpass';
+      bp.frequency.setValueAtTime(12000, t);
+      bp.frequency.exponentialRampToValueAtTime(90, t + 3.2);
+      const g2 = c.createGain();
+      env(g2, t, 0.002, 0.8 * vol, 3.3);
+      n.connect(bp).connect(g2).connect(out(1, 1));
+      break;
+    }
+    case 'riserMask': {
+      // dissonant cluster creeping upward: dread
+      [110, 116.5, 155.6].forEach((f, i) => {
+        const o = c.createOscillator();
+        o.type = 'sawtooth';
+        o.frequency.setValueAtTime(f, t);
+        o.frequency.exponentialRampToValueAtTime(f * 1.9, t + 2.5);
+        const lp = c.createBiquadFilter();
+        lp.type = 'lowpass';
+        lp.frequency.setValueAtTime(250, t);
+        lp.frequency.exponentialRampToValueAtTime(3200, t + 2.5);
+        const g = c.createGain();
+        g.gain.setValueAtTime(0.0001, t);
+        g.gain.exponentialRampToValueAtTime(0.06 * vol, t + 2.2);
+        g.gain.exponentialRampToValueAtTime(0.0001, t + 2.6);
+        o.connect(lp).connect(g).connect(panner(i - 1)).connect(out(1, 0.6));
+        o.start(t);
+        o.stop(t + 2.65);
+      });
+      break;
+    }
+    case 'credit': {
+      [392, 587.33, 783.99, 1174.66].forEach((f, i) => {
+        const o = c.createOscillator();
+        o.type = 'triangle';
+        o.frequency.value = f;
+        const g = c.createGain();
+        env(g, t + i * 0.11, 0.02, 0.05 * vol, 2.4);
+        o.connect(g).connect(panner((i - 1.5) / 2)).connect(out(1, 0.9));
+        o.start(t + i * 0.11);
+        o.stop(t + 3);
+      });
+      break;
+    }
     case 'alarm': {
       for (let i = 0; i < 3; i++) {
         const o = c.createOscillator();
@@ -360,6 +455,15 @@ export function playSfx(name: Sfx, opts: { pan?: number; gain?: number } = {}) {
       break;
     }
   }
+}
+
+/** Pull everything (including the drone) down for a moment — used for the blackout and the post-climax hush. */
+export function duck(level: number, seconds: number) {
+  if (!enabled || !ctx || !master) return;
+  const now = ctx.currentTime;
+  master.gain.cancelScheduledValues(now);
+  master.gain.setTargetAtTime(0.7 * level, now, 0.03);
+  master.gain.setTargetAtTime(0.7, now + seconds, 0.25);
 }
 
 /** Low ambient bed: detuned oscillators through a breathing low-pass, plus a sub. */

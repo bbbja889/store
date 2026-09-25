@@ -74,6 +74,9 @@ export function Hero() {
           <motion.p initial={{ opacity: 0 }} animate={play ? { opacity: 1 } : {}} transition={{ delay: 1.9 }} className="hud mt-4 text-[10px] text-ink-3">
             {live ? '● Live catalog' : '○ Demo catalog — connect Firestore to go live'}
           </motion.p>
+          <motion.p initial={{ opacity: 0 }} animate={play ? { opacity: 1 } : {}} transition={{ delay: 2.1 }} className="mt-2 text-xs text-ink-3">
+            Developed by <span className="text-ink-2">Yashraj Ghemud</span>
+          </motion.p>
         </div>
       </div>
       <motion.div

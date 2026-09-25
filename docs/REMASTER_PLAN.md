@@ -385,3 +385,10 @@ _(appended during the build)_
 - Firebase now loads only after the film, so it never competes with the intro.
 
 **Known follow-ups.** Server-side re-scan of submitted APKs (Cloud Function); reproducible-build badges; community reports; an OG image; lighter first-load bundle (three.js + postprocessing ≈ 360 KB gzip, lazy after the gate).
+
+**Iteration 4 — "VICZO: The Mask" (re-cut for suspense and a climax) + developer credits.**
+The film became a 26-second, three-act movie with an antagonist:
+- *Act I — suspense:* "Yashraj Ghemud presents" → 3:07 AM heartbeat → the storm → the masks swarm into one giant **Mask** (hundreds of glitching tiles, burning eyes) → growl, lunge at the camera → hard cut to black and silence.
+- *Act II — battle:* Ember and Tide ignite in the dark, circle the Mask and burn it (a live **Mask integrity** HUD value drops as tiles peel away), the Mask roars with a red shockwave and throws them back.
+- *Act III — climax:* fusion → the Core is born (bullet time) → the Sentinel sweep **detonates the Mask** (second bullet time, huge shard storm) → a held breath of silence → the VICZO wordmark → end title "Written, designed & developed by Yashraj Ghemud" → seamless landing on the site.
+Developer credit also added to the gate ("A Yashraj Ghemud production"), the hero, the finale (full name forged in fire on two lines), the footer, page metadata and the README. The quality tier can no longer change mid-film (it would rebuild the world). This iteration was verified with type-check, tests and a production build only — no browser capture, at the user's request.

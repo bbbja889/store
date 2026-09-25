@@ -2,6 +2,8 @@
 
 **See inside every app before it sees inside you.**
 
+**Developer:** Yashraj Ghemud — written, designed & developed by Yashraj Ghemud.
+
 VICZO is an app & website store where every Android APK is X-rayed **on your own device** — permissions, trackers, signatures, certificate, SHA-256 — and every link is checked for disguises. It is wrapped in a single persistent 3D world with a 16-second cinematic intro.
 
 > Full design document — story bible, shot-by-shot intro script, chapter plan, engine spec and iteration log: **[docs/REMASTER_PLAN.md](docs/REMASTER_PLAN.md)**
@@ -22,7 +24,11 @@ Sideloaded APKs and links forwarded over SMS/WhatsApp are where most phone scams
 
 ## The experience
 
-- **Intro film** — gate with real loading and a sound choice → pulse → storm of app tiles with glitching "masks" → ember & tide energy dragons → fusion with real bullet time → the Sentinel laser shatters masks → particle **VICZO** wordmark sliced by a blade of light → the camera lands on the homepage with no cut. Skippable (Esc), shortened for returning visitors, disabled for `prefers-reduced-motion`. Replay from the footer, ⌘K, or `/intro`.
+- **Intro film — "VICZO: The Mask"** (26 s, three acts):
+  - *Act I, suspense:* "Yashraj Ghemud presents" → 3:07 AM heartbeat → the storm of apps → the glitching masks swarm into one **giant Mask** → it growls and lunges at the camera → hard cut to black, dead silence.
+  - *Act II, the battle:* two fire-dragons (Ember = apps, Tide = web) ignite in the dark, circle the Mask and burn it (live **Mask integrity** HUD drops), the Mask roars and throws them back.
+  - *Act III, climax:* the dragons fuse → the Core is born (bullet time) → the Sentinel laser sweeps → **the Mask detonates** (bullet time again) → a held breath of silence → the **VICZO** wordmark burns and is sliced by a blade of light → end title **"Written, designed & developed by Yashraj Ghemud"** → the camera lands on the homepage with no cut.
+  - Skippable (Esc), a short cut for returning visitors, disabled for `prefers-reduced-motion`. Replay from the footer, ⌘K, or `/intro`.
 - **Home as a story** — Core → The Noise → The Sentinel → Quarantine (Rapier rigid-body physics you can tap) → The Passport → The Vault (catalog) → The Forge → finale credits portal.
 - Procedural Web Audio sound design (no audio files), Lenis smooth scrolling, critically-damped camera, bloom/grain/chromatic aberration, quality tiers and automatic degradation.
 
@@ -66,4 +72,6 @@ npx vite-node scripts/build-demo-catalog.ts
 - Demo apps are **fictional**; their passports were produced by the real engine from synthetic builds. Demo websites are real, well-known free tools; their Link X-ray runs live. Set `VITE_DEMO_CATALOG=false` to hide them.
 - Sentinel is static pre-install analysis, not an antivirus. A passport generated in a publisher's browser can be forged — which is exactly why anyone can re-verify the real download.
 
-Crafted by **Yashraj Ghemud**.
+---
+
+**Developer: Yashraj Ghemud** · VICZO Store · VICZO: The Mask

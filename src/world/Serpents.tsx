@@ -1,7 +1,7 @@
 import { useFrame } from '@react-three/fiber';
 import { useMemo, useRef } from 'react';
 import * as THREE from 'three';
-import { FULL, range, easeInOutCubic } from '@/intro/script';
+import { FULL, MASK_CENTER, range, samplePath } from '@/intro/script';
 import { world } from '@/state/world';
 import { playSfx } from '@/audio/engine';
 import { clock, COLORS, glowTexture } from './fx';
@@ -21,18 +21,38 @@ export const serpentHeads = {
   visible: 0,
 };
 
+type V3 = [number, number, number];
+
+/** Flight choreography (film time → head position). Ember comes from below-left, Tide from above-right. */
+const FLIGHT: Record<'ember' | 'tide', { t: number; p: V3 }[]> = {
+  ember: [
+    { t: FULL.serpents, p: [-26, -9, 12] },
+    { t: FULL.serpents + 1.15, p: [-15, -4, 7] },
+    { t: FULL.serpents + 2.35, p: [-9.5, 2.5, -0.5] },
+    { t: FULL.breathMask - 0.5, p: [-5, 6.5, -8.5] }, // circling above the Mask
+    { t: FULL.breathMask + 0.1, p: [-6.5, 2.5, -3.2] }, // dive — fire
+    { t: FULL.roar - 0.15, p: [-7.2, 0.6, 0.2] },
+    { t: FULL.roar + 0.25, p: [-8.4, 1.1, 2.6] }, // thrown back by the roar
+    { t: FULL.breath + 0.05, p: [-4.8, 0.3, 0.4] }, // face-off
+    { t: FULL.fusion, p: [-4.2, 0.25, 0.3] },
+  ],
+  tide: [
+    { t: FULL.serpents, p: [26, 9, 12] },
+    { t: FULL.serpents + 1.15, p: [15, 4.5, 6] },
+    { t: FULL.serpents + 2.35, p: [9.5, -2, -1] },
+    { t: FULL.breathMask - 0.5, p: [5, -5.5, -8.5] },
+    { t: FULL.breathMask + 0.1, p: [6.5, -1.2, -3.2] },
+    { t: FULL.roar - 0.15, p: [7.2, 0, 0.2] },
+    { t: FULL.roar + 0.25, p: [8.4, -0.4, 2.6] },
+    { t: FULL.breath + 0.05, p: [4.8, -0.3, 0.4] },
+    { t: FULL.fusion, p: [4.2, -0.25, 0.3] },
+  ],
+};
+
+const tmpV3: V3 = [0, 0, 0];
 function headPosition(sign: 1 | -1, t: number, out: THREE.Vector3) {
-  const s = FULL;
-  const u = range(t, s.serpents, s.breath);
-  const thetaEnd = sign === 1 ? Math.PI : 0;
-  const theta = thetaEnd - (1 - u) * 2.6 * Math.PI;
-  const R = 5 + 17 * Math.pow(1 - u, 1.3);
-  const y = sign * -6.5 * (1 - u) + 1.3 * Math.sin(u * 9 + (sign === 1 ? 0 : 1.7)) * (1 - u);
-  out.set(Math.cos(theta) * R, y, Math.sin(theta) * R);
-  // Breath: turn head-to-head and hold
-  const b = easeInOutCubic(range(t, s.breath, s.fusion - 0.05));
-  if (b > 0) out.lerp(new THREE.Vector3(sign === 1 ? -4.2 : 4.2, sign * 0.25, 0.3), b);
-  return out;
+  samplePath(FLIGHT[sign === 1 ? 'ember' : 'tide'], t, tmpV3);
+  return out.set(tmpV3[0], tmpV3[1], tmpV3[2]);
 }
 
 const ribbonMaterial = (head: THREE.Color, body: THREE.Color, tail: THREE.Color) =>
@@ -256,6 +276,11 @@ function Serpent({ sign }: { sign: 1 | -1 }) {
     if (t < s.fusion && Math.random() < 0.9) {
       emitSparks({ count: 2, origin: st.p, color, speed: [0.3, 1.6], life: [0.4, 1.0], intensity: 3, gravity: -0.4, size: [0.04, 0.1] });
     }
+    if (t >= s.breathMask && t < s.breathMask + 0.9) {
+      // fire at the Mask
+      const dir = new THREE.Vector3(...MASK_CENTER).sub(st.p).normalize();
+      emitSparks({ count: 14, origin: st.p, color: isEmber ? COLORS.ember : COLORS.tide, direction: [dir.x, dir.y, dir.z], spread: 0.18, speed: [9, 16], life: [0.3, 0.6], intensity: 5, gravity: 0, drag: 0.5, size: [0.08, 0.22] });
+    }
     if (t >= s.breath && t < s.fusion) {
       const dir = st.p.clone().multiplyScalar(-1).normalize();
       emitSparks({ count: 16, origin: st.p, color: isEmber ? COLORS.ember : COLORS.tide, direction: [dir.x, dir.y, dir.z], spread: 0.22, speed: [7, 14], life: [0.25, 0.55], intensity: 5, gravity: 0, drag: 0.6, size: [0.08, 0.22] });
@@ -282,19 +307,23 @@ function Serpent({ sign }: { sign: 1 | -1 }) {
 }
 
 export function Serpents() {
-  const cue = useRef({ riser: false, swell: false, lastT: -1 });
+  const cue = useRef({ riser: false, swell: false, fire: false, lastT: -1 });
   useFrame(() => {
     const intro = world.intro;
     if (!intro.running || intro.kind !== 'full') return;
     const c = cue.current;
-    if (intro.t < c.lastT) c.riser = c.swell = false;
+    if (intro.t < c.lastT) c.riser = c.swell = c.fire = false;
     c.lastT = intro.t;
     if (!c.riser && intro.t >= FULL.serpents) {
       c.riser = true;
       playSfx('riserEmber');
       playSfx('riserTide');
     }
-    if (!c.swell && intro.t >= FULL.breath) {
+    if (!c.fire && intro.t >= FULL.breathMask) {
+      c.fire = true;
+      playSfx('whoosh', { gain: 1.2 });
+    }
+    if (!c.swell && intro.t >= FULL.breath - 0.1) {
       c.swell = true;
       playSfx('swell');
     }
