@@ -10,7 +10,9 @@ import { Core } from './Core';
 import { Director } from './Director';
 import { Effects } from './Effects';
 import { FOG } from './fx';
+import { FilmCues } from './FilmCues';
 import { Laser } from './Laser';
+import { Mask } from './Mask';
 import { Packets } from './Packets';
 import { Serpents } from './Serpents';
 import { Shards } from './Shards';
@@ -21,9 +23,9 @@ import { Title } from './Title';
 const Quarantine = lazy(() => import('./sets/Quarantine'));
 
 const COUNTS = {
-  1: { packets: 520, rings: [16, 22, 28] as [number, number, number], title: 3200 },
-  2: { packets: 950, rings: [22, 30, 38] as [number, number, number], title: 5200 },
-  3: { packets: 1400, rings: [26, 34, 44] as [number, number, number], title: 7000 },
+  1: { packets: 520, rings: [16, 22, 28] as [number, number, number], title: 3200, mask: 260 },
+  2: { packets: 950, rings: [22, 30, 38] as [number, number, number], title: 5200, mask: 420 },
+  3: { packets: 1400, rings: [26, 34, 44] as [number, number, number], title: 7000, mask: 560 },
 };
 
 function Studio() {
@@ -91,7 +93,9 @@ export function WorldCanvas() {
         <Backdrop tier={tier} />
         <Core tier={tier} />
         <Packets count={c.packets} ringCounts={c.rings} />
+        <Mask count={c.mask} />
         <Serpents />
+        <FilmCues />
         <Title count={c.title} />
         <Laser />
         <Sparks />

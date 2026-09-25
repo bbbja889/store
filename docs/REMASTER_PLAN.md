@@ -10,8 +10,9 @@
 - Purana VICZO ek simple APK + website directory tha (light theme, 2.8s text intro, fake upload box). Build bhi toot raha tha (`src/data/mockData.ts` missing tha).
 - Naya VICZO ek **real problem solve karta hai**: bahar se download kiye gaye APK aur scam links (fake KYC, loan apps, "mod APK", look-alike domains) se log hack hote hain. VICZO ka **Sentinel** engine APK ko **aapke browser ke andar hi** khol ke dikhata hai — permissions, trackers, signature, certificate, SHA-256 — aur ek **Trust Score** deta hai. File kahin upload nahi hoti.
 - Links ke liye **Link X-ray**: punycode/homograph (`аpple.com` with Cyrillic "а"), typo-squatting, fake subdomains, shady TLDs — sab offline check.
-- Website ek **story** hai: *Noise → Ember & Tide → Fusion → Sentinel → Vault → Forge → Horizon*. Intro ek 16-second 3D film hai (do energy "dragons" takraate hain, crystal core banta hai, laser scan se fake packets toot'te hain, particles se VICZO naam banta hai, aur camera bina cut ke website mein land karta hai).
-- Ending: footer mein ek "credits" portal — end.mp4 jaisa fire + laser slice — "Crafted by Yashraj Ghemud".
+- Intro ab ek **26-second, 3-act film** hai — **"VICZO: THE MASK"**: *"Yashraj Ghemud presents"* → raat 3:07 ka suspense → fake apps milke ek **giant villain Mask** banate hain → Mask camera pe jhapatta hai → black + silence → do fire-dragons (Ember & Tide) ki **battle** → fusion → Sentinel laser se **Mask blast (climax, bullet-time)** → silence → VICZO title → **"Written, designed & developed by Yashraj Ghemud"** → camera bina cut ke website pe land.
+- Website bhi ek **story** hai: *Noise → Sentinel → Quarantine → Passport → Vault → Forge → Horizon*.
+- Ending: footer mein "credits" portal — end.mp4 jaisa fire + laser slice — **YASHRAJ GHEMUD** aag mein forged.
 
 ---
 
@@ -92,6 +93,7 @@ The website is one continuous world. Every page is a *place* in it; navigating i
 | Element | Meaning | Look |
 | --- | --- | --- |
 | **THE NOISE** | The open internet: endless apps and links, no one checking | A slow vortex of floating app tiles (procedural glyph icons). Some tiles **glitch red** — the masks |
+| **THE MASK** | The antagonist: every disguised app, gathered into one face | A giant skull-mask built from hundreds of glitching red tiles, burning eye slits; it growls, lunges, roars — and is destroyed by the Sentinel |
 | **EMBER** | The makers of apps | A serpent of warm fire (orange → terracotta), dragon-like ribbon with sparks — homage to the red dragon in `start.mp4` |
 | **TIDE** | The builders of the web | A serpent of cool light (cyan → teal) — the blue dragon |
 | **FUSION** | Apps + sites meeting in one place (the original tagline, made literal) | White-violet flash, shockwave, time slows |
@@ -107,69 +109,64 @@ The website is one continuous world. Every page is a *place* in it; navigating i
 
 ---
 
-## 5. Intro film — shot-by-shot script
+## 5. Intro film — "VICZO: THE MASK" (screenplay)
 
-Total ≈ 16 s after the gate. 2.39:1 letterbox bars are in place from the first frame and retract at the handoff. The world clock (simulation) is separate from the camera clock so we can do real **bullet time**.
+**Written, designed & developed by Yashraj Ghemud.** 26.5 s after the gate, three acts: *suspense → battle → climax → silence → title → credits*. 2.39:1 letterbox bars from the first frame, retracting at the handoff. Film time and simulation time are separate clocks, so bullet time is real (the camera keeps moving while sparks and shards hang in the air). Every number on the HUD is a live simulation value.
 
-### SHOT 00 — THE GATE (preloader, waits for the user)
-- Black. The old intro's thin horizontal line draws from centre outward (continuity with v1).
-- A single ember point breathes at centre (it *is* the point of Shot 01 — no cut later).
-- Mono readout: `VICZO / SENTINEL — ASSEMBLING THE WORLD 000 → 100` (real progress: fonts + shader warm-up + world build).
-- Choice: **[ ENTER WITH SOUND ]  [ ENTER IN SILENCE ]** · `skip intro`.
-- Why a gate: browsers block autoplay audio; the gate also gives a clean start.
+### SHOT 00 — THE GATE (waits for the viewer)
+- "A YASHRAJ GHEMUD PRODUCTION" breathes in at the top. The v1 intro's thin line draws across the horizon; a single ember point pulses at its centre (it is the point of Shot 01 — no cut).
+- Real loading readout `000 → 100` (fonts, shader compilation, world build), then **[ENTER WITH SOUND] [ENTER IN SILENCE]** · `skip intro`.
 
-### SHOT 01 — PULSE (0.0 → 1.8 s)
-- **Camera:** 6 → 4.5 units slow push-in; handheld micro-drift (2-octave noise, 0.02 u), roll ±0.3°.
-- **Action:** the point beats twice (lub-dub), bloom swelling with each beat.
-- **Caption (typed, mono, bottom-left):** "Every day, people install apps from places nobody checks."
-- **Sound:** two sub-bass heartbeats; room tone.
+### ACT I — SUSPENSE
 
-### SHOT 02 — THE NOISE (1.8 → 4.6 s)
-- **Action:** the point bursts; ~1,500 app tiles explode outward and settle into a turning vortex. ~12 % are *masks*: red flicker, vertex glitch, RGB split.
-- **Camera:** **dolly-zoom (Vertigo)** — dolly back 4.5 → 28 u while FOV opens 20° → 62°; the world "unfolds" around the viewer.
-- **HUD (top-right):** `PACKETS IN RANGE 1,512` (live count).
-- **Caption:** "Most are harmless. Some wear a mask."
-- **Sound:** whoosh, glitch crackles.
+**01 · 3:07 AM (0.0 → 3.0 s)**
+- Title card: **YASHRAJ GHEMUD** *presents* (blur-to-sharp, letter-spacing collapsing).
+- Macro push-in on the pulsing point: two double heartbeats, bloom swelling with each.
+- Caption: *"3:07 AM. Somewhere, a phone installs an app nobody checked."*
 
-### SHOT 03 — TWO FIRES (4.6 → 7.6 s)
-- **Action:** EMBER enters lower-left, TIDE upper-right — glowing ribbon serpents with hot heads, tapered scaled bodies and spark trails. They spiral around the vortex in a double helix.
-- **Camera:** orbits 0° → 70° around the centre, tracking the serpents' midpoint, gentle roll ±4°.
-- **HUD tags follow the heads (projected):** `EMBER — the makers of apps` / `TIDE — the builders of the web`.
-- **Sound:** two risers panned L/R (warm saw vs cool sine).
+**02 · The Noise (3.0 → 5.9 s)**
+- The point bursts; ~1,400 app tiles explode into a turning storm. The camera pulls back fast to reveal it. Some tiles are *masks*: red, glitching, a skull flickering through their icon.
+- Caption: *"It looked like every other app."* · HUD: `PACKETS 1400 · STATUS SCANNING`.
 
-### SHOT 04 — BREATH & FUSION (7.6 → 9.6 s)
-- **Action:** the serpents turn head-to-head and breathe energy cones (homage to the dragons' fireballs in `start.mp4`). The cones meet → **FUSION**: white-violet flash, expanding shockwave ring, chromatic aberration spike, camera shake impulse.
-- **Bullet time:** simulation slows to 0.15× for 0.6 s while the camera keeps moving at 1× — sparks hang in the air — then ramps back.
-- **The Core crystallises** from the flash (scale 0 → 1 with a soft elastic overshoot).
-- **Caption:** "When they meet—"
-- **Sound:** reverse swell → sub boom + crash with a long generated-reverb tail.
+**03 · The Mask (5.9 → 9.45 s)** — the antagonist
+- The masks break away from the storm and **swarm into one giant skull-mask** made of hundreds of glitching red tiles, with burning eye slits. A dissonant riser creeps up; red alarm vignette pulses at the screen edges. HUD flips to `⚠ THREAT DETECTED`, `MASK INTEGRITY 100%`.
+- Caption: *"It wasn't."*
+- Ominous slow push-in… the Mask **growls and lunges at the camera** (camera recoils, shake) — **hard cut to black and dead silence** (0.5 s).
 
-### SHOT 05 — THE SENTINEL (9.6 → 12.0 s)
-- **Action:** the Core ignites a laser plane that sweeps top → bottom through the storm. Every tile it crosses is judged:
-  - clean → re-coloured ember (apps) or tide (sites) and flies into orbit-ring slots around the Core;
-  - mask → a red reticle snaps on it, then it **shatters** into shards with real ballistic motion (velocity, spin, gravity, drag, fade).
-- **Camera:** crane down following the laser, settling in front of the Core.
-- **HUD:** `MASKS DETECTED 0 → 181` · `SENTINEL: SWEEPING → CLEAR`.
-- **Caption:** "—nothing stays hidden."
-- **Sound:** laser hum panned with the sweep; small pops per shatter (rate-limited).
+### ACT II — THE BATTLE
 
-### SHOT 06 — THE NAME (12.0 → 14.4 s)
-- **Action:** ~6,000 particles (from the storm and the shards) converge into **VICZO**, sampled from the display font. The letters burn with an ember → violet → tide gradient (homage to the flaming gradient logo in `start.mp4`), flames licking upward.
-- A **vertical blade of light slices through the name** left → right with a flash and spark burst (homage to `end.mp4`).
-- "STORE" tracks in, letter-spacing collapsing (homage to the original v1 intro).
-- **Tagline:** "Apps & Sites. X-rayed. All in one place."
-- **Sound:** shimmer chord, blade "zing", final low hit.
+**04 · Two Fires (9.45 → 13.2 s)**
+- Out of the black, two fire-dragons ignite — **EMBER** (the makers of apps) from below-left, **TIDE** (the builders of the web) from above-right — ribbon bodies with scale bands, five-boned neon wings, spark trails. HUD tags follow their heads.
+- Caption: *"But two fires were already on their way."* · Status `ENGAGED`.
 
-### SHOT 07 — ARRIVAL (14.4 → 16.0 s) — the intro's ending
-- **Action:** the title dissolves upward and is inhaled by the Core like embers. The storm calms to an ambient drift.
-- **Camera:** crane up + 25° orbit into the exact homepage hero framing (Core right of centre on desktop, top-centre on mobile). **No cut: the last frame of the film is the first frame of the website.**
-- **UI assembles:** letterbox bars retract (top up, bottom down), the nav drops in on a spring, the headline rises character by character, CTAs pop.
-- Scroll unlocks.
+**05 · The Battle (13.2 → 14.85 s)**
+- They circle high above the Mask, then dive and **breathe fire at it**: tiles burn off its cheeks, `MASK INTEGRITY` drops live.
+- The Mask **roars**: a red shockwave ring, eyes flaring, the dragons thrown back.
+
+### ACT III — CLIMAX
+
+**06 · Fusion (14.85 → 17.2 s)**
+- The dragons turn head-to-head and breathe at each other → **FUSION**: white-violet flash, shockwave, **bullet time** (0.12× for 0.6 s). The Core crystallises where they met.
+- Caption: *"When they meet —"*
+
+**07 · The Sentinel (17.2 → 19.4 s)**
+- The Core fires the Sentinel sweep. Every storm tile it crosses is judged — clean tiles gain colour and fly into orbit, masks shatter.
+- When the laser reaches the Mask: **the Mask detonates** — hundreds of red shards, sparks, a long white bloom, maximum shake and a second **bullet time**. Status `THREAT NEUTRALISED`.
+- Caption: *"— nothing stays hidden."*
+
+**08 · Silence (19.4 → 20.7 s)**
+- Everything ducks to near-silence; shards drift down; one heartbeat. The held breath after the climax.
+
+**09 · The Name (20.7 → 23.1 s)**
+- ~7,000 particles converge into **VICZO**, burning ember → violet → tide with rising flames; a true dolly-zoom holds the title's size while the world stretches. A **blade of light slices through it** (homage to `end.mp4`). "STORE" tracks in; tagline *"Apps & Sites. X-rayed. All in one place."*
+
+**10 · Credits & Arrival (23.1 → 26.5 s)**
+- The title is inhaled by the Core. End-title card: **WRITTEN, DESIGNED & DEVELOPED BY — YASHRAJ GHEMUD** with a light sweep and a chime.
+- Camera cranes into the homepage hero framing; letterbox retracts; the UI assembles. **No cut — the film's last frame is the website's first.**
 
 ### Variants
-- **Returning visitor:** 2.5 s "re-entry" (pulse → fusion flash → Core → arrival). Full film via *Replay intro* in the footer, the command palette, or `/intro`.
-- **`prefers-reduced-motion`:** no film; a 600 ms fade to the hero.
-- **No WebGL:** 2D fallback title card, then the site with a static gradient world.
+- **Returning visitor:** 3 s re-entry (fusion flash → Core → arrival) with a "Developed by Yashraj Ghemud" card. Full film via *Replay the intro* (footer), ⌘K, or `/intro`.
+- **`prefers-reduced-motion`:** no film. **No WebGL:** static gradient world.
 
 ---
 
@@ -186,7 +183,7 @@ On the home page, scroll position drives the camera through the world along a Ca
 | 4 | **The Passport** | A 3D passport card turning with scroll | Anatomy of a Trust Passport + *Verify Download* explained |
 | 5 | **The Vault** | Calm library wall of tiles | The catalog: Apps/Sites tabs, fuzzy search, working category filters, sort by Trust/Newest/Name, 3D tilt cards with trust rings |
 | 6 | **The Forge** | Ember anvil ring | "Publish with proof" — 4 steps → `/upload` |
-| 7 | **Horizon — Credits** (the site's ending) | Portal ring | Giant outline VICZO, "Crafted by Yashraj Ghemud" forged in fire with a laser slice, *Replay the intro*, links |
+| 7 | **Horizon — Credits** (the site's ending) | Portal ring | "Written, designed & developed by" — **YASHRAJ GHEMUD** forged in fire with a laser slice, *Replay the intro*, links |
 
 ---
 
@@ -383,5 +380,12 @@ _(appended during the build)_
 - Offline Firestore cache snapshot was reported as "Live" → only server snapshots count.
 - Vault wall made glass cards busy → wall pushed into the fog, cards made more opaque; Forge steps moved left of the anvil.
 - Firebase now loads only after the film, so it never competes with the intro.
+
+**Iteration 4 — "VICZO: The Mask" (re-cut for suspense and a climax) + developer credits.**
+The film became a 26-second, three-act movie with an antagonist:
+- *Act I — suspense:* "Yashraj Ghemud presents" → 3:07 AM heartbeat → the storm → the masks swarm into one giant **Mask** (hundreds of glitching tiles, burning eyes) → growl, lunge at the camera → hard cut to black and silence.
+- *Act II — battle:* Ember and Tide ignite in the dark, circle the Mask and burn it (a live **Mask integrity** HUD value drops as tiles peel away), the Mask roars with a red shockwave and throws them back.
+- *Act III — climax:* fusion → the Core is born (bullet time) → the Sentinel sweep **detonates the Mask** (second bullet time, huge shard storm) → a held breath of silence → the VICZO wordmark → end title "Written, designed & developed by Yashraj Ghemud" → seamless landing on the site.
+Developer credit also added to the gate ("A Yashraj Ghemud production"), the hero, the finale (full name forged in fire on two lines), the footer, page metadata and the README. The quality tier can no longer change mid-film (it would rebuild the world). This iteration was verified with type-check, tests and a production build only — no browser capture, at the user's request.
 
 **Known follow-ups.** Server-side re-scan of submitted APKs (Cloud Function); reproducible-build badges; community reports; an OG image; lighter first-load bundle (three.js + postprocessing ≈ 360 KB gzip, lazy after the gate).

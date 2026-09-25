@@ -7,7 +7,7 @@ import { clock } from './fx';
  * Rigid shards with ballistic motion: velocity, gravity, air drag, spin, a floor bounce with
  * restitution and friction — cheap "realistic physics" for shattering masks.
  */
-const MAX = 1400;
+const MAX = 2600;
 const P = new Float32Array(MAX * 3);
 const V = new Float32Array(MAX * 3);
 const Q = new Float32Array(MAX * 4);

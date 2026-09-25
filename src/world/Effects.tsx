@@ -19,6 +19,8 @@ export function Effects({ tier }: { tier: number }) {
       boost += Math.exp(-Math.pow((t - FULL.fusion - 0.1) * 2.2, 2)) * 2.4;
       boost += Math.exp(-Math.pow((t - FULL.slice - 0.2) * 5, 2)) * 1.1;
       boost += Math.exp(-Math.pow((t - FULL.burst) * 5, 2)) * 0.8;
+      boost += Math.exp(-Math.pow((t - FULL.roar - 0.05) * 5, 2)) * 0.9;
+      boost += Math.exp(-Math.pow((t - FULL.maskBreak - 0.12) * 1.8, 2)) * 3.2;
     }
     if (bloom.current) bloom.current.intensity = 1.05 + boost;
     const v = Math.min(1, Math.abs(world.scrollVelocity) / 60);

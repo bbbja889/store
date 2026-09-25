@@ -165,16 +165,16 @@ export function Core({ tier }: { tier: number }) {
       mote.current.visible = moteOn;
       if (moteOn) {
         let beat = 0;
-        for (const b of [0.25, 0.47, 1.05, 1.27]) beat += Math.exp(-Math.pow((t - b) * 9, 2)) * (b > 1 ? 1.3 : 1);
+        s.beats.forEach((b, k) => (beat += Math.exp(-Math.pow((t - b) * 9, 2)) * (k >= 2 ? 1.3 : 1)));
         if (intro.running && st.beats < 2) {
-          const next = [0.25, 1.05][st.beats];
+          const next = [s.beats[0], s.beats[2]][st.beats];
           if (t >= next) {
             st.beats++;
             playSfx('heartbeat');
           }
         }
         const breathe = gate ? 0.5 + 0.5 * Math.sin(clock.t * 2.2) : 0;
-        const approach = intro.running ? range(t, 1.3, s.burst) : 0;
+        const approach = intro.running ? range(t, s.burst - 0.9, s.burst) : 0;
         const sc = 0.22 + breathe * 0.06 + beat * 0.28 + approach * 0.5;
         mote.current.scale.setScalar(sc);
         (mote.current.material as THREE.SpriteMaterial).color.setRGB(3 + beat * 4, 1.6 + beat * 2, 0.8 + beat);

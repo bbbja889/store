@@ -21,7 +21,8 @@ export function laserY(t: number) {
   return 11 - 22 * easeInOutCubic(range(t, s.scan, s.scanEnd));
 }
 
-export const introStats = { packets: 0, masks: 0 };
+/** Live film statistics for the HUD (real simulation values, not decoration). */
+export const introStats = { packets: 0, masks: 0, integrity: 1 };
 
 export function Packets({ count, ringCounts }: { count: number; ringCounts: [number, number, number] }) {
   const mesh = useRef<THREE.InstancedMesh>(null);

@@ -6,7 +6,7 @@ import { useExperience } from '@/state/experience';
 import { playSfx } from '@/audio/engine';
 
 /** Letters forged from embers, then cut by a vertical blade of light — the end.mp4 homage. */
-function Forged({ text }: { text: string }) {
+function Forged({ lines }: { lines: string[] }) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: '-15% 0px' });
   const [cut, setCut] = useState(false);
@@ -15,30 +15,38 @@ function Forged({ text }: { text: string }) {
     const a = window.setTimeout(() => {
       setCut(true);
       playSfx('blade');
-    }, 1500);
+    }, 1700);
     return () => window.clearTimeout(a);
   }, [inView]);
+  let n = 0;
   return (
     <div ref={ref} className="relative inline-block select-none">
-      <h2 className="display relative text-[clamp(3.2rem,13vw,11rem)] leading-none" aria-label={text}>
-        {text.split('').map((ch, i) => (
-          <motion.span
-            key={i}
-            aria-hidden
-            className="inline-block"
-            initial={{ opacity: 0, y: 40, filter: 'blur(14px)' }}
-            animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
-            transition={{ duration: 1.1, delay: 0.06 * i, ease: [0.16, 1, 0.3, 1] }}
-            style={{
-              backgroundImage: 'linear-gradient(180deg, #fff6d6 0%, #ffb070 30%, #ff6b2c 62%, #7a1c00 100%)',
-              WebkitBackgroundClip: 'text',
-              backgroundClip: 'text',
-              color: 'transparent',
-              filter: 'drop-shadow(0 0 18px rgba(255,107,44,0.55)) drop-shadow(0 0 60px rgba(255,80,20,0.35))',
-            }}
-          >
-            {ch === ' ' ? ' ' : ch}
-          </motion.span>
+      {/* glow lives on the parent: the letters animate their own filter (blur) */}
+      <h2 className="display relative leading-[0.88]" aria-label={lines.join(' ')} style={{ filter: 'drop-shadow(0 0 18px rgba(255,107,44,0.55)) drop-shadow(0 0 60px rgba(255,80,20,0.35))' }}>
+        {lines.map((line, li) => (
+          <span key={line} className={li === 0 ? 'block text-[clamp(3.2rem,13vw,11rem)]' : 'block text-[clamp(2.2rem,8.6vw,7.2rem)]'}>
+            {line.split('').map((ch) => {
+              const i = n++;
+              return (
+                <motion.span
+                  key={i}
+                  aria-hidden
+                  className="inline-block"
+                  initial={{ opacity: 0, y: 40, filter: 'blur(14px)' }}
+                  animate={inView ? { opacity: 1, y: 0, filter: 'blur(0px)' } : {}}
+                  transition={{ duration: 1.1, delay: 0.06 * i, ease: [0.16, 1, 0.3, 1] }}
+                  style={{
+                    backgroundImage: 'linear-gradient(180deg, #fff6d6 0%, #ffb070 30%, #ff6b2c 62%, #7a1c00 100%)',
+                    WebkitBackgroundClip: 'text',
+                    backgroundClip: 'text',
+                    color: 'transparent',
+                  }}
+                >
+                  {ch === ' ' ? '\u00a0' : ch}
+                </motion.span>
+              );
+            })}
+          </span>
         ))}
       </h2>
       {/* the blade */}
@@ -70,9 +78,9 @@ export function Finale() {
         <p className="serif-accent mx-auto mt-6 max-w-2xl text-2xl text-ink-2 sm:text-3xl">Every app. Every link. Seen through, before it reaches you.</p>
       </div>
       <div className="relative flex flex-col items-center px-4 text-center">
-        <p className="hud mb-4 text-ember-light">Crafted by</p>
-        <Forged text="YASHRAJ" />
-        <p className="hud mt-6 text-ink-3">Yashraj Ghemud · VICZO</p>
+        <p className="hud mb-4 text-ember-light">Written, designed &amp; developed by</p>
+        <Forged lines={['YASHRAJ', 'GHEMUD']} />
+        <p className="hud mt-6 text-ink-3">Developer · VICZO Store · VICZO: The Mask</p>
         <button
           onClick={replay}
           className="mt-10 inline-flex items-center gap-2 rounded-full border border-white/15 bg-void/40 px-5 py-2.5 font-mono text-xs uppercase tracking-[0.2em] text-ink-2 backdrop-blur transition hover:border-ember/60 hover:text-ink"
@@ -81,7 +89,9 @@ export function Finale() {
         </button>
       </div>
       <div className="container-x flex flex-col items-center justify-between gap-4 border-t border-white/10 py-6 text-xs text-ink-3 sm:flex-row">
-        <p>© {year} VICZO Store. Sentinel runs on your device — 0 bytes of your files uploaded.</p>
+        <p>
+          © {year} VICZO Store · Developer: <span className="text-ink-2">Yashraj Ghemud</span> · Sentinel runs on your device — 0 bytes uploaded.
+        </p>
         <nav className="flex gap-5" aria-label="Footer">
           <Link to="/scan" className="hover:text-ink">Sentinel</Link>
           <Link to="/upload" className="hover:text-ink">Publish</Link>

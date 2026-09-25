@@ -61,7 +61,7 @@ export function CommandPalette() {
       { id: 'link', label: 'Check a suspicious link', hint: 'Link X-ray', icon: <Globe className="h-4 w-4 text-tide" />, run: go('/scan?mode=link') },
       { id: 'verify', label: 'Verify a downloaded APK', hint: 'Hash + certificate match', icon: <ShieldCheck className="h-4 w-4 text-safe" />, run: go('/scan?mode=verify') },
       { id: 'publish', label: 'Publish an app or website', hint: 'The Forge', icon: <Upload className="h-4 w-4 text-ember-light" />, run: go('/upload') },
-      { id: 'replay', label: 'Replay the intro film', hint: '16 seconds', icon: <Film className="h-4 w-4 text-fusion" />, run: () => { setOpen(false); navigate('/'); replay(); } },
+      { id: 'replay', label: 'Replay the intro film', hint: 'VICZO: The Mask · 26 s', icon: <Film className="h-4 w-4 text-fusion" />, run: () => { setOpen(false); navigate('/'); replay(); } },
       { id: 'sound', label: 'Toggle sound', hint: 'Procedural audio', icon: <Volume2 className="h-4 w-4 text-ink-2" />, run: () => { toggleSound(); setOpen(false); } },
     ];
     const query = q.trim();

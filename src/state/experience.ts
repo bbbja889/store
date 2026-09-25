@@ -73,6 +73,8 @@ export const useExperience = create<ExperienceState>((set, get) => ({
   },
   setPaletteOpen: (paletteOpen) => set({ paletteOpen }),
   degrade: () => {
+    // Never rebuild the world mid-film; resolution scaling handles that moment.
+    if (get().phase !== 'site') return;
     const t = get().tier;
     if (t > 1) set({ tier: (t - 1) as Tier });
   },
