@@ -81,11 +81,13 @@ const wingMaterial = (color: THREE.Color) =>
       }`,
   });
 
+// Leading edge first; longer, fanned bones read as a dragon wing rather than a fin.
 const BONES = [
-  { a: 0.12, l: 2.1 },
-  { a: 0.55, l: 2.5 },
-  { a: 0.98, l: 2.1 },
-  { a: 1.4, l: 1.4 },
+  { a: 0.05, l: 3.1 },
+  { a: 0.42, l: 3.4 },
+  { a: 0.8, l: 2.9 },
+  { a: 1.15, l: 2.3 },
+  { a: 1.45, l: 1.5 },
 ];
 
 function Serpent({ sign }: { sign: 1 | -1 }) {
@@ -224,11 +226,13 @@ function Serpent({ sign }: { sign: 1 | -1 }) {
     st.f.subVectors(st.pts[6], st.pts[12]).normalize();
     st.r.crossVectors(st.f, new THREE.Vector3(0, 1, 0)).normalize();
     st.u.crossVectors(st.r, st.f).normalize();
-    const flap = 0.75 * Math.sin(clock.t * 6.5 + (isEmber ? 0 : 1.3)) + 0.2;
+    const phase0 = clock.t * 5.2 + (isEmber ? 0 : 1.3);
     const wp = wings.attributes.position.array as Float32Array;
     let o = 0;
     for (const side of [1, -1]) {
-      const tips = BONES.map((bn) => {
+      const tips = BONES.map((bn, j) => {
+        // the flap travels from the leading edge to the trailing bones
+        const flap = 0.85 * Math.sin(phase0 - j * 0.35) + 0.25;
         const rs = st.r.clone().multiplyScalar(side * Math.cos(flap)).addScaledVector(st.u, Math.sin(flap));
         return shoulder
           .clone()

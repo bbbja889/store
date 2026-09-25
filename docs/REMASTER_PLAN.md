@@ -365,3 +365,23 @@ Each iteration ends with a *critique pass*: screenshots → list what feels weak
 
 ### Iteration notes
 _(appended during the build)_
+
+**Iteration 1 — Foundation & engine.** Engine written first and verified against five real APKs (multidex, native libs, v1+v2+v3 signing): signatures and content digests verify with WebCrypto; the public AOSP test key and debug keys are identified. Anti-emulator/Frida strings appear in legitimate test libraries, so they became zero-weight *info* signals. Synthetic sample APKs were cross-checked with androguard. Added rules for keyboards (offline vs online), VPN services and SMS reading after the demo catalog showed an SMS-reading finance app scoring "clean".
+
+**Iteration 2 — Cinema (screenshot review of every shot).**
+- Film grain was applied to HDR values before tone mapping → coloured speckles in the mote. Tone mapping moved directly after bloom.
+- Plan said "dolly-zoom on the reveal"; in practice a pull-back + widening FOV reads better for the burst, so the true dolly-zoom (push-in + FOV widening, title holds its size) moved to the name shot.
+- Orbit rings passed in front of the particle title → title plane moved to z = 5.4, in front of the rings.
+- The blade-slice flash whited out the frame → peak lowered and shortened.
+- Hero headline did not reveal after the handoff (in-view observer attached late) → reveal now driven by `useInView` + `animate`.
+- Dragon wings read as paper planes → 5 fanned bones with a travelling flap wave.
+
+**Iteration 3 — Chapters.**
+- Hero copy sat on busy tiles → legibility scrim; headline re-sized to 4 lines so stats fit above the fold.
+- "The Noise" framed the Core behind the heading → station re-aimed outward into the storm.
+- Sentinel gate was edge-on behind the text → ¾ camera, gate on the right.
+- Offline Firestore cache snapshot was reported as "Live" → only server snapshots count.
+- Vault wall made glass cards busy → wall pushed into the fog, cards made more opaque; Forge steps moved left of the anvil.
+- Firebase now loads only after the film, so it never competes with the intro.
+
+**Known follow-ups.** Server-side re-scan of submitted APKs (Cloud Function); reproducible-build badges; community reports; an OG image; lighter first-load bundle (three.js + postprocessing ≈ 360 KB gzip, lazy after the gate).

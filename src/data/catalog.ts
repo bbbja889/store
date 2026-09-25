@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useExperience } from '@/state/experience';
 import { DEMO_APPS, DEMO_SITES } from './demo';
 import type { AppListing, Listing, SiteListing } from './types';
 
@@ -21,6 +22,7 @@ let cache: CatalogState = {
 };
 const listeners = new Set<(s: CatalogState) => void>();
 let started = false;
+let waiting = false;
 
 function emit(next: Partial<CatalogState>) {
   cache = { ...cache, ...next };
@@ -35,6 +37,18 @@ function merge<T extends Listing>(live: T[], demo: T[]): T[] {
 /** Subscribes once to Firestore (lazy-loaded) and merges live listings over the demo catalog. */
 function start() {
   if (started) return;
+  // Never compete with the intro film for bandwidth: connect once the site is showing.
+  if (useExperience.getState().phase !== 'site') {
+    if (waiting) return;
+    waiting = true;
+    const unsub = useExperience.subscribe((st) => {
+      if (st.phase === 'site') {
+        unsub();
+        start();
+      }
+    });
+    return;
+  }
   started = true;
   const timer = window.setTimeout(() => emit({ loading: false }), 6000);
   void (async () => {
